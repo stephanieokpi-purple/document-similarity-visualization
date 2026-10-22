@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Document Visualization Tool</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries -->
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+
+    <!-- D3 CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <style>
+        /* ---------------- MDS PANEL ---------------- */
+        #mdsView {
+            width: 35%;
+            background: #f1f5f9;
+            border-left: 3px solid #2563eb;
+            padding: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mdsView h2 {
+            text-align: center;
+            margin: 0;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 6px;
+            color: #1e293b;
+        }
+
+        #mdsPlot {
+            width: 100%;
+            flex: 1;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Heatmap toggle alignment */
+        #mdsControls {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Interactive Document Visualization Tool</h1>
+
+    <div id="container">
+
+        <!-- ---------------- DOCUMENT LIST ---------------- -->
+        <div id="docList">
+            <h2>Clustered Document List</h2>
+
+            <input type="text" id="searchBox" placeholder="Search Document ID...">
+
+            <div id="documentList"></div>
+        </div>
+
+        <!-- ---------------- WORKSPACE ---------------- -->
+        <div id="workspace">
+            <h2>Document Workspace</h2>
+
+            <div id="workspaceToolbar">
+                <button class="toolbarBtn" id="tileWindows">⊞ Tile Windows</button>
+                <button class="toolbarBtn" id="closeAllWindows">✕ Close All</button>
+            </div>
+        </div>
+
+        <!-- ---------------- MDS VIEW ---------------- -->
+        <div id="mdsView">
+
+            <h2>Document Similarity (MDS)</h2>
+
+            <!-- 🔥 Controls -->
+            <div id="mdsControls">
+                <button id="toggleHeatmap" class="toolbarBtn">
+                    🔥 Heatmap ON
+                </button>
+            </div>
+
+            <!-- MDS Plot -->
+            <svg id="mdsPlot"></svg>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <script src="mds.js"></script>
+
+</body>
+</html>

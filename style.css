@@ -1,0 +1,415 @@
+/* ---------------- GLOBAL PAGE ---------------- */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: #f1f5f9;
+    color: #000;
+}
+
+h1 {
+    text-align: center;
+    padding: 18px;
+    margin: 0;
+    background: #36373a;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* ---------------- MAIN CONTAINER ---------------- */
+#container {
+    display: flex;
+    height: 650px;
+    margin: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background: white;
+    border: 2px solid #cbd5e1;
+}
+
+/* ---------------- DOCUMENT LIST PANEL ---------------- */
+#docList {
+    width: 25%;
+    background: #e2e8f0;
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 3px solid #2563eb;
+    flex-shrink: 0;
+}
+
+#docList h2 {
+    text-align: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 6px;
+}
+
+#searchBox {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    margin-bottom: 12px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* ---------------- CLUSTER BLOCKS ---------------- */
+.clusterBlock {
+    margin-bottom: 14px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.clusterBlock:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.activeCluster .clusterHeader {
+    filter: brightness(1.15);
+}
+
+/* ---------------- CLUSTER HEADER ---------------- */
+.clusterHeader {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    color: white;
+    cursor: default;
+    gap: 8px;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.clusterHeader::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.18);
+    transition: left 0.3s ease;
+}
+
+.clusterHeader:hover::after { left: 0; }
+
+.clusterTitle {
+    font-weight: bold;
+    font-size: 14px;
+    flex: 1;
+}
+
+.countBadge {
+    font-size: 11px;
+    background: rgba(255,255,255,0.25);
+    padding: 2px 7px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.clusterBtns {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.clusterBtn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: white;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+.clusterBtn:hover { background: rgba(255,255,255,0.4); }
+
+/* ---------------- REORDER BUTTONS ---------------- */
+.reorderBtn {
+    font-size: 10px;
+    padding: 2px 5px;
+}
+
+.reorderBtn:hover {
+    background: rgba(255,255,255,0.5) !important;
+    transform: scale(1.1);
+}
+
+.clusterBlock ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+/* ---------------- DRAGGABLE DOC ITEMS ---------------- */
+#documentList li {
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #2563eb;
+    border-radius: 5px;
+    cursor: grab;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    user-select: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    list-style: none;
+}
+
+#documentList li:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    background: #f0f7ff;
+}
+
+#documentList li.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+    transform: scale(0.97);
+}
+
+#documentList li.selectedDoc {
+    background: #bfdbfe !important;
+    border-left-color: #1d4ed8 !important;
+    font-weight: bold;
+}
+
+/* ---------------- WORKSPACE DROP READY ---------------- */
+#workspace.dropReady {
+    background: #f0f7ff;
+    outline: 2px dashed #2563eb;
+    outline-offset: -4px;
+}
+
+/* ---------------- SORTABLE PLACEHOLDER ---------------- */
+.sortable-placeholder {
+    border: 2px dashed #94a3b8;
+    background: #f1f5f9;
+    border-radius: 8px;
+    height: 60px;
+    margin-bottom: 14px;
+}
+
+/* ---------------- WORKSPACE ---------------- */
+#workspace {
+    flex: 1;
+    position: relative;
+    padding: 20px;
+    background: #f8fafc;
+    overflow: auto;
+}
+
+#workspace h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #111827;
+    border-bottom: 3px solid #2563eb;
+    padding-bottom: 8px;
+}
+
+/* ---------------- WORKSPACE TOOLBAR ---------------- */
+#workspaceToolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+}
+
+.toolbarBtn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.toolbarBtn:hover { background: #1d4ed8; }
+
+/* ---------------- DOCUMENT WINDOWS - PILL SHAPE ---------------- */
+@keyframes popIn {
+    0%   { transform: scale(0.5); opacity: 0; }
+    70%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.documentWindow {
+    width: 340px;
+    height: 240px;
+    border-radius: 24px;
+    position: absolute;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    animation: popIn 0.3s ease forwards;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    border: none;
+    z-index: 2;
+}
+
+.documentWindow:hover {
+    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+    transform: scale(1.02);
+}
+
+/* ---------------- DOCUMENT HEADER ---------------- */
+.documentHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    color: white;
+    cursor: move;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+}
+
+.documentHeader::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.15);
+    transition: left 0.3s ease;
+}
+
+.documentHeader:hover::after { left: 0; }
+
+.docTitle {
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 220px;
+    position: relative;
+    z-index: 1;
+}
+
+.winBtns {
+    display: flex;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.winBtn {
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.15s, transform 0.15s;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.winBtn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.2);
+}
+
+/* ---------------- DOCUMENT CONTENT ---------------- */
+.documentContent {
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #1f2937;
+    line-height: 1.7;
+    height: calc(100% - 44px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* ---------------- CONNECTION LINES SVG ---------------- */
+#connectionLines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ---------------- TOAST ---------------- */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1e293b;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toastVisible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toastError { background: #dc2626; }
+
+/* ---------------- MDS SCROLL FIX ---------------- */
+#mdsView {
+    width: 35%;
+    background: #f1f5f9;
+    border-left: 3px solid #2563eb;
+    padding: 12px;
+
+    overflow-x: auto;   /* ✅ horizontal scroll */
+    overflow-y: hidden; /* optional */
+}
+
+/* SVG bigger than container */
+#mdsPlot {
+    min-width: 900px;   /* ✅ force scroll */
+    height: 500px;
+}
+
+.mdsNode {
+    transition: all 0.2s ease;
+}
+
+.mdsTooltip {
+    position: absolute;
+    padding: 6px 10px;
+    background: #0f172a;
+    color: white;
+    font-size: 12px;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.2s;
+}
